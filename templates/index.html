@@ -1,0 +1,18 @@
+<!doctype html>
+{% extends "layout.html" %}
+{% import "helpers/forms.html" as forms %}
+<html>
+<head>
+{% block title %}Google Maps Application{% endblock %}
+{% block content %}
+{{ super() }}
+<form action="/map" method="POST">
+<fieldset>
+<legend>Make a Map</legend>
+{{ forms.render(gen_form) }}
+<p><input type="Submit" value="Press to Generate Map"></p>
+</fieldset>
+</form>
+{% endblock content %}
+</head>
+</html>
