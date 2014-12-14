@@ -3,6 +3,8 @@ from keeper.data import CRUDMixin, db
 class Group(CRUDMixin, db.Model):
 	__tablename__ = 'contact_group'
 
+	id = db.Column(db.Integer, primary_key=True)
+
 	name = db.Column(db.String)
 	contacts = db.relationship('Contact', backref='group', lazy='select')
 	user_id = db.Column(db.Integer, db.ForeignKey('users_user.id'))

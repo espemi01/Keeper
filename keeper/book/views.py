@@ -18,7 +18,7 @@ def view_group(group_id=None):
 	data = query_to_list(query)
 	return render_template("book/group.html", contacts=data, contact=contact)
 
-@keeper.route("/groups")
+@keeper.route("/groups", methods=("GET", "POST"))
 @login_required
 def view_groups(group_id=None):
 	group = Group.get_or_404(group_id)
@@ -29,7 +29,8 @@ def view_groups(group_id=None):
 	data = query_to_list(query)
 	return render_template("users/data_list.html", data=data, title='Groups')
 
-@keeper.route("/groups/<int:group_id>/contact", methods=("GET", "POST"))
+@keeper.route("/groups/<int:group_id>/new", methods=("GET", "POST"))
+@login_required
 def add_contact(group_id=None):
 	group = Group.get_or_404(group_id)
 
@@ -41,6 +42,11 @@ def add_contact(group_id=None):
 
 	return jsonify(errors=form.errors), 400
 
+# @keeper.route("/groups/<int:group_id>/<int:contact.id>")
+# @login_required
+# def view_map(group_id=None):
+
+
 @keeper.route("/group", methods=("GET", "POST"))
 @login_required
 def add_group():
@@ -49,7 +55,7 @@ def add_group():
 	if form.validate_on_submit():
 		Group.create(owner=current_user, **form.data)
 		flash("Added Group")
-		return redirect(url_for("keeper.index"))
+		return redirect(url_for("user.index"))
 
 	query = Group.query.filter(Group.user_id == current_user.id)
 	data = query_to_list(query)

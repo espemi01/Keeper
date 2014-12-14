@@ -1,10 +1,10 @@
 {% extends "layout.html" %}
 {% import "helpers/forms.html" as forms %}
-{% block title %}Log into Keeper!{% endblock %}
+{% block title %}Sign in!{% endblock %}
 {% block content %}
 {{super()}}
 <form action="{{url_for('users.login', next=request.args.get('next', '')) }}" method="POST">
 {{ forms.render(form) }}
-<p><imput type="Submit" value="Sign In"></p>
+<p><input type="Submit" value="Login"></p>
 </form>
 {% endblock content %}

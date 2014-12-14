@@ -26,7 +26,7 @@ class User(UserMixin, CRUDMixin, db.Model):
 			self._salt = bytes(SystemRandom().getrandbits(1))
 		self._password = self._hash_password(value)
 
-	def if_valid_password(self, password):
+	def is_valid_password(self, password):
 		new_hash = self._hash_password(password)
 		return compare_digest(new_hash, self._password)
 
