@@ -21,13 +21,18 @@ def view_group(group_id=None):
 @keeper.route("/groups", methods=("GET", "POST"))
 @login_required
 def view_groups(group_id=None):
-	group = Group.get_or_404(group_id)
-	if not group.user_id == current_user.id:
-		abort(401)
-
-	query = Group.query.filter(Group.id == group_id)
+	query = Group.query.filter(Group.user_id == current_user.id)
 	data = query_to_list(query)
-	return render_template("users/data_list.html", data=data, title='Groups')
+	results = []
+
+	try:
+		results = [next(data)]
+		for row in data:
+			row = [_make_link(cell) if i == 0 else cell for i, cell in enumerate(row)]
+			results.append(row)
+	except StopIteration:
+		pass
+	return render_template("book/view.html", info=results)
 
 @keeper.route("/groups/<int:group_id>/new", methods=("GET", "POST"))
 @login_required

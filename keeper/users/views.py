@@ -17,7 +17,6 @@ def index():
 @login_required
 def view_profile(id=None):
 	user = User.get_or_404(current_user.id)
-	print(current_user.id)
 	if not user.id == current_user.id:
 		abort(401)
 	query = user.query.filter(user.id == current_user.id)

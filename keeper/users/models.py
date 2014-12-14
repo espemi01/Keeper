@@ -8,7 +8,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 from keeper.data import CRUDMixin, db
 
 class User(UserMixin, CRUDMixin, db.Model):
-	__tablename__ = 'users_user'
+	__tablename__ = 'users'
 
 	name = db.Column(db.String(50), unique=True)
 	email = db.Column(db.String(120))
