@@ -32,7 +32,7 @@ def view_groups(group_id=None):
 			results.append(row)
 	except StopIteration:
 		pass
-	return render_template("book/view.html", info=results)
+	return render_template("book/view.html", info=results)j
 
 @keeper.route("/groups/<int:group_id>/new", methods=("GET", "POST"))
 @login_required
