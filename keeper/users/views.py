@@ -1,10 +1,28 @@
 from flask import Blueprint, Flask, redirect, render_template, request, url_for
-from flask.ext.login import login_required, login_user, logout_user
+from flask.ext.login import login_required, login_user, logout_user, current_user
 
 from .forms import LoginForm, RegistrationForm
 from .models import User
+from keeper.data import query_to_list
 
 users = Blueprint('users', __name__)
+
+@users.route("/")
+def index():
+	if not current_user.is_anonymous():
+		return redirect(url_for("users.view_profile"))
+	return render_template("index.html")
+
+@users.route("/user")
+@login_required
+def view_profile(id=None):
+	user = User.get_or_404(current_user.id)
+	print(current_user.id)
+	if not user.id == current_user.id:
+		abort(401)
+	query = user.query.filter(user.id == current_user.id)
+	data = query_to_list(query)
+	return render_template("users/view.html", info=data)
 
 @users.route('/login/', methods=('GET', 'POST'))
 def login():

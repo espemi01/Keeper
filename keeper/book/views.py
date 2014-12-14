@@ -7,11 +7,16 @@ from keeper.data import query_to_list
 
 keeper = Blueprint("keeper", __name__)
 
-@keeper.route("/")
-def index():
-	if not current_user.is_anonymous():
-		return redirect(url_for("keeper.view_groups"))
-	return render_template("index.html")
+@keeper.route("/groups/<int:group_id>")
+@login_required
+def view_group(group_id=None):
+	group = Group.get_or_404(group_id)
+	if not group.user_id == current_user.id:
+		abort(401)
+
+	query = Contact.query.filter(Contact.group_id == group_id)
+	data = query_to_list(query)
+	return render_template("book/group.html", contacts=data, contact=contact)
 
 @keeper.route("/groups")
 @login_required
@@ -20,9 +25,9 @@ def view_groups(group_id=None):
 	if not group.user_id == current_user.id:
 		abort(401)
 
-	query = Contact.query.filter(Contact.group_id == group_id)
+	query = Group.query.filter(Group.id == group_id)
 	data = query_to_list(query)
-	return render_template("book/group.html", contacts=data, contact=contact)
+	return render_template("users/data_list.html", data=data, title='Groups')
 
 @keeper.route("/groups/<int:group_id>/contact", methods=("GET", "POST"))
 def add_contact(group_id=None):
