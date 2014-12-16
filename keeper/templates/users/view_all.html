@@ -1,0 +1,10 @@
+{% extends "layout.html" %}
+{% import "helpers/forms.html" as forms %}
+{% import "helpers/tables.html" as tables %}
+{% block title %}Welcome {{ user.name }}! Viewing all users:{% endblock %}
+{% block content %}
+{{super()}}
+<table>
+{{ tables.render(info) }}
+</table>
+{% endblock content %}
