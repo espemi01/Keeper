@@ -75,7 +75,7 @@ def add_group():
 @login_required
 def view_map():
 	gen_form = ContactForm()
-	return render_template("mappage.html",
+	return render_template("maps/mappage.html",
 							gen_form=gen_form)
 
 @keeper.route("/mapshow", methods=("POST", ))
