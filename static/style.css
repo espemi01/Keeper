@@ -38,8 +38,9 @@ iframe{
     top: 20%;
 }
 div#title{
-    align-self: center;
-    align-items: center;
-    width: 10%;
+    width: 20%;
+    position: absolute;
+    left: 40%;
+    
 }
 
