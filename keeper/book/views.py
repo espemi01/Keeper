@@ -19,8 +19,7 @@ def view_group(name):
 @login_required
 def view_groups(group_id=None):
 	groups = Group.get_or_404(current_user.id)
-	if not groups.user_id == current_user.id:
-		return redirect(url_for("keeper.add_group"))
+	
 	query = Group.query.filter(Group.user_id == current_user.id)
 	data = query_to_list(query)
 	return render_template("book/view.html", info=data)
