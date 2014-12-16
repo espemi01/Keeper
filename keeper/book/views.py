@@ -66,8 +66,8 @@ def get_param():
 	form = ContactForm()
 	if form.validate_on_submit():
 		url=makeurl(form)
-		return render_template('googlemaps.html', url=url)
-	return render_template("error.html", form=form)
+		return render_template('maps/googlemaps.html', url=url)
+	return render_template("maps/error.html", form=form)
 
 
 _LINK = Markup('<a href="{url}">{name}</a>')
