@@ -9,7 +9,7 @@ keeper = Blueprint("keeper", __name__)
 
 @keeper.route("/groups/<int:group_id>")
 @login_required
-def view_group(group_id=None):
+def view_group(id=None):
 	group = Group.get_or_404(group_id)
 	if not group.user_id == current_user.id:
 		abort(401)
@@ -21,23 +21,17 @@ def view_group(group_id=None):
 @keeper.route("/groups", methods=("GET", "POST"))
 @login_required
 def view_groups(group_id=None):
-	query = Group.query.filter(Group.user_id == current_user.id)
+	group = Group.get_or_404(current_user.id)
+	if not group.user_id == current_user.id:
+		abort(401)
+	query = user.query.filter(user.id == current_user.id)
 	data = query_to_list(query)
-	results = []
+	return render_template("book/view.html", info=data)
 
-	try:
-		results = [next(data)]
-		for row in data:
-			row = [_make_link(cell) if i == 0 else cell for i, cell in enumerate(row)]
-			results.append(row)
-	except StopIteration:
-		pass
-	return render_template("book/view.html", info=results)j
-
-@keeper.route("/groups/<int:group_id>/new", methods=("GET", "POST"))
+@keeper.route("/user/<group>/new", methods=("GET", "POST"))
 @login_required
-def add_contact(group_id=None):
-	group = Group.get_or_404(group_id)
+def new(group):
+	g = Group.get_or_404(group)
 
 	form = ContactForm(csrf_enabled=False)
 
@@ -47,12 +41,7 @@ def add_contact(group_id=None):
 
 	return jsonify(errors=form.errors), 400
 
-# @keeper.route("/groups/<int:group_id>/<int:contact.id>")
-# @login_required
-# def view_map(group_id=None):
-
-
-@keeper.route("/group", methods=("GET", "POST"))
+@keeper.route("/add_group", methods=("GET", "POST"))
 @login_required
 def add_group():
 	form = GroupForm()

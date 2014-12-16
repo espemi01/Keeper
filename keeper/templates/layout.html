@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+<div>
 <head>
 <title>{% block title %}{{ title }}{% endblock %}</title>
 </head>
@@ -9,14 +10,7 @@
 <nav>
 <ul>
 <li><a href="/">Home</a></li>
-<li><a href="/group">group</a></li>
-<li>
-	{% if current_user.is_anonymous() %}
-	<a href="{{url_for('users.register')}}">Register</a> / <a href="{{url_for('users.login')}}">Log In</a>
-	{% else %}
-	Logged in as {{current_user.name}} <a href="{{url_for('users.logout')}}">Logout</a>
-	{% endif %}
-</li>
+<li><a href="{{url_for('users.profile')}}">Profile</a></li>
 </ul>
 </nav>
 </header>
@@ -31,7 +25,16 @@
 <section>
 {% block content %}{% endblock %}
 </section>
-<footer>
+<footer style="position:fixed;bottom:3px;width:100%;">
+<hr>
+{% if current_user.is_anonymous() %}
+<a href="{{url_for('users.register')}}">Register</a> / <a href="{{url_for('users.login')}}">Log In</a>
+{% else %}
+Logged in as {{current_user.name}} <a href="{{url_for('users.logout')}}">Logout</a>  |  
+Add a <a href="{{url_for('keeper.add_group')}}">group</a>  |  
+Add a <a href="{{url_for('keeper.add_group')}}">contact</a>
+{% endif %}
 </footer>
 </body>
+</div>
 </html>

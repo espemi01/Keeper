@@ -10,18 +10,23 @@ users = Blueprint('users', __name__)
 @users.route("/")
 def index():
 	if not current_user.is_anonymous():
-		return redirect(url_for("users.view_profile"))
+		return redirect(url_for("users.profile"))
 	return render_template("index.html")
 
-@users.route("/user")
+@users.route("/profile")
 @login_required
-def view_profile(id=None):
+def profile(id=None):
 	user = User.get_or_404(current_user.id)
 	if not user.id == current_user.id:
 		abort(401)
 	query = user.query.filter(user.id == current_user.id)
 	data = query_to_list(query)
-	return render_template("users/view.html", info=data)
+	return render_template("users/view.html", info=data, user=current_user)
+
+# @users.route("/users")
+# @login_required
+# def view_all():
+# 	query = user.
 
 @users.route('/login/', methods=('GET', 'POST'))
 def login():

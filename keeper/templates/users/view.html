@@ -1,10 +1,13 @@
 {% extends "layout.html" %}
 {% import "helpers/forms.html" as forms %}
 {% import "helpers/tables.html" as tables %}
-{% block title %}View your profile!{% endblock %}
+{% block title %}Welcome {{ user.name }}!{% endblock %}
 {% block content %}
 {{super()}}
-<table>
-{{ tables.render(info) }}
-</table>
+
+<p style="margin:10px;">
+<h4 style="margin:5px;">Phone: </h4>{{ user.phone }}
+<h4 style="margin:5px;">Email: </h4>{{ user.email }}
+</p>
+
 {% endblock content %}
