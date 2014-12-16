@@ -41,12 +41,7 @@ def new():
 		flash("Added New Contact")
 		return redirect(url_for("users.index"))
 
-
-
-	query = Contact.query.filter(Contact.group_id == Group.id)
-	flash("There was a problem, Please try again")
-
-	return render_template("book/contact.html", g=group, user=current_user, form=form)
+	return render_template("book/contact.html", g=groups, user=current_user, form=form)
 
 @keeper.route("/add_group", methods=("GET", "POST"))
 @login_required

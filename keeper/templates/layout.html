@@ -16,7 +16,7 @@
 </header>
 {% set messages = get_flashed_messages() %}
 {% if messages %}
-<section>
+<section style="height:50%;">
 	{% for message in messages %}
 	<p>{{ message }}</p>
 	{% endfor %}
@@ -25,14 +25,15 @@
 <section>
 {% block content %}{% endblock %}
 </section>
-<footer style="position:fixed;bottom:3px;width:100%;">
+<footer style="position:fixed;bottom:20px;width:100%;height:20px;">
 <hr>
 {% if current_user.is_anonymous() %}
 <a href="{{url_for('users.register')}}">Register</a> / <a href="{{url_for('users.login')}}">Log In</a>
 {% else %}
 Logged in as {{current_user.name}} <a href="{{url_for('users.logout')}}">Logout</a>  |  
 Add a <a href="{{url_for('keeper.add_group')}}">group</a>  |  
-Add a <a href="{{url_for('keeper.new')}}">contact</a>
+Add a <a href="{{url_for('keeper.new')}}">contact</a>  |  
+View <a href="{{url_for('keeper.view_groups')}}">groups</a>
 {% endif %}
 </footer>
 </body>

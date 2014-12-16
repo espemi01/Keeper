@@ -1,10 +1,10 @@
 {% macro render(form) %}
-<dl>
+<dl style="padding-top:0px;padding-bottom:0px;">
 {% for field in form if field.type not in ["HiddenField", "CSRFTokenField"] %}
 <dt>{{ field.label }}</dt>
 <dd>{{ field }}
 {% if field.errors %}
-<ul class="errors">
+<ul class="errors" style="margin:0px;">
 {% for error in field.errors %}
 <li>{{error}}</li>
 {% endfor %}

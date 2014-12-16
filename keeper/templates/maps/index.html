@@ -3,7 +3,10 @@
 {% import "helpers/forms.html" as forms %}
 <html>
 <head>
-{% block title %}Google Maps Application{% endblock %}
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+  {% block title %}Google Maps Application{% endblock %}
 {% block content %}
 {{ super() }}
 <form action="{{url_for('get_param')}}" method="POST">
@@ -14,5 +17,5 @@
 </fieldset>
 </form>
 {% endblock content %}
-</head>
+</body>
 </html>
