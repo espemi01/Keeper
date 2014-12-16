@@ -32,7 +32,6 @@ def view_groups(group_id=None):
 @keeper.route("/new", methods=("GET", "POST"))
 @login_required
 def new():
-	
 	form = ContactForm()
 	groups = Group.query.filter(Group.user_id == current_user.id)
 

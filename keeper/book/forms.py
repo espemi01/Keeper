@@ -13,7 +13,7 @@ class ContactForm(Form):
 
 	name = fields.StringField(validators=[Required()])
 	phone = fields.StringField(validators=[Required()])
-	address = fields.TextField('', validators=[Required()])
-	city = fields.TextField('', validators=[Required()])
-	state = fields.TextField('', validators=[Required()])
-	country = fields.TextField('', validators=[Required()])
+	address = fields.TextField(validators=[Required()])
+	city = fields.TextField(validators=[Required()])
+	state = fields.TextField(validators=[Required()])
+	country = fields.TextField(validators=[Required()])

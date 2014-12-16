@@ -4,10 +4,10 @@
 <head>
 <title>{% block title %}{{ title }}{% endblock %}</title>
 </head>
-<body>
+<body style="margin-bottom:0px;">
 <header>
 <h1>{{ self.title() }}</h1>
-<nav>
+<nav style="top:-20px;position:relative;">
 <ul>
 <li><a href="/">Home</a></li>
 <li><a href="{{url_for('users.profile')}}">Profile</a></li>
@@ -16,16 +16,16 @@
 </header>
 {% set messages = get_flashed_messages() %}
 {% if messages %}
-<section style="height:50%;">
+<section>
 	{% for message in messages %}
 	<p>{{ message }}</p>
 	{% endfor %}
 </section>
 {% endif %}
-<section>
+<section style="bottom:25px;position:relative;background-color:White;">
 {% block content %}{% endblock %}
 </section>
-<footer style="position:fixed;bottom:20px;width:100%;height:20px;">
+<footer style="position:fixed;bottom:20px;width:100%;height:20px;background-color:White;">
 <hr>
 {% if current_user.is_anonymous() %}
 <a href="{{url_for('users.register')}}">Register</a> / <a href="{{url_for('users.login')}}">Log In</a>
