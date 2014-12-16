@@ -19,6 +19,9 @@ class Contact(CRUDMixin, db.Model):
 	__tablename__ = 'contact'
 
 	name = db.Column(db.String)
-	address = db.Column(db.String)
 	phone = db.Column(db.String)
+	address = db.Column(db.String)
+	city = db.Column(db.String)
+	state = db.Column(db.String)
+	country = db.Column(db.String)
 	group_id = db.Column(db.Integer, db.ForeignKey('groups.id'))

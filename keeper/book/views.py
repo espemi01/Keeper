@@ -7,7 +7,7 @@ from keeper.data import query_to_list
 
 keeper = Blueprint("keeper", __name__)
 
-@keeper.route("/groups/<int:group_id>")
+@keeper.route("/groups/<name>")
 @login_required
 def view_group(id=None):
 	group = Group.get_or_404(group_id)
@@ -28,31 +28,17 @@ def view_groups(group_id=None):
 	data = query_to_list(query)
 	return render_template("book/view.html", info=data)
 
-<<<<<<< HEAD
-@keeper.route("/user/<group>/new", methods=("GET", "POST"))
-=======
-	try:
-		results = [next(data)]
-		for row in data:
-			row = [_make_link(cell) if i == 0 else cell for i, cell in enumerate(row)]
-			results.append(row)
-	except StopIteration:
-		pass
-	return render_template("book/view.html", info=results)
-
-@keeper.route("/groups/<int:group_id>/new", methods=("GET", "POST"))
->>>>>>> 7b1daf649286b9b2bc2a6b266d311ca8a2505e9e
+@keeper.route("/groups/<group>/new", methods=("GET", "POST"))
 @login_required
 def new(group):
-	g = Group.get_or_404(group)
+	# form = ContactForm(csrf_enabled=False)
 
-	form = ContactForm(csrf_enabled=False)
+	# if form.validate():
+	# 	Contact.create(group=group, **form.data)
+	# 	flash("Added New Contact")
+	# 	return redirect(url_for("user.index"))
 
-	if form.validate():
-		Contact.create(**form.data)
-		return '', 204
-
-	return jsonify(errors=form.errors), 400
+	# return jsonify(errors=form.errors), 400
 
 @keeper.route("/add_group", methods=("GET", "POST"))
 @login_required
@@ -77,13 +63,14 @@ def add_group():
 		pass
 	return render_template("book/group.html", group=results, form=form)
 
-@app.route("/map")
-def index():
-	gen_form = GenForm()
+@keeper.route("/map")
+@login_required
+def view_map():
+	gen_form = ContactForm()
 	return render_template("mappage.html",
 							gen_form=gen_form)
 
-@app.route("/mapshow", methods=("POST", ))
+@keeper.route("/mapshow", methods=("POST", ))
 def get_param():
 	form = GenForm()
 	if form.validate_on_submit():
@@ -96,12 +83,6 @@ _LINK = Markup('<a href="{url}">{name}</a>')
 def _make_link(group_id):
 	url = url_for(".add_group", group_id=group_id)
 	return _LINK.format(url=url, name=group_id)
-
-class GenForm(Form):
-	address = fields.TextField('', validators=[validators.required()])
-	city = fields.TextField('', validators=[validators.required()])
-	state = fields.TextField('', validators=[validators.required()])
-	country = fields.TextField('', validators=[validators.required()])
 
 def makeurl(form):
 	address = str(request.form['address'])
