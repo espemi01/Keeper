@@ -34,7 +34,7 @@ def view_groups(group_id=None):
 def new():
 	
 	form = ContactForm()
-
+	groups = Group.query.filter(Group.user_id == current_user.id)
 
 	if form.validate():
 		Contact.create(group=form.group, **form.data)
@@ -54,22 +54,10 @@ def add_group():
 	form = GroupForm()
 
 	if form.validate_on_submit():
-		Group.create(owner=current_user, **form.data)
+		group = Group.create(owner=current_user, **form.data)
 		flash("Added Group")
-		return redirect(url_for("users.index"))
-
-	query = Group.query.filter(Group.user_id == current_user.id)
-	data = query_to_list(query)
-	results = []
-
-	try:
-		results = [next(data)]
-		for row in data:
-			row = [_make_link(cell) if i == 0 else cell for i, cell in enumerate(row)]
-			results.append(row)
-	except StopIteration:
-		pass
-	return render_template("book/group.html", group=results, form=form)
+		return redirect(url_for('keeper.view_groups'))
+	return render_template('book/group.html', form=form)
 
 @keeper.route("/map")
 @login_required

@@ -32,7 +32,7 @@ div#user{
     border-bottom: 1px solid black;
     padding-left: 5px;
 }
-iframe#mappy{
+iframe{
     position: absolute
     right: 5%
     top: 20%;
