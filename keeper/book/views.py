@@ -59,20 +59,21 @@ def add_group():
 		return redirect(url_for('keeper.view_groups'))
 	return render_template('book/group.html', form=form)
 
-@keeper.route("/map")
+@keeper.route("/map", methods=("GET", "POST"))
 @login_required
 def view_map():
 	gen_form = ContactForm()
 	return render_template("maps/mappage.html",
 							gen_form=gen_form)
 
-@keeper.route("/mapshow", methods=("POST", ))
+@keeper.route("/mapshow", methods=("POST", "GET"))
 def get_param():
 	form = ContactForm()
 	if form.validate_on_submit():
 		url=makeurl(form)
 		return render_template('googlemaps.html', url=url)
 	return render_template("error.html", form=form)
+
 
 _LINK = Markup('<a href="{url}">{name}</a>')
 

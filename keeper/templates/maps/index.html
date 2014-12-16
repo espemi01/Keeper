@@ -6,7 +6,7 @@
 {% block title %}Google Maps Application{% endblock %}
 {% block content %}
 {{ super() }}
-<form action="/map" method="POST">
+<form action="{{url_for('get_param')}}" method="POST">
 <fieldset>
 <legend>Make a Map</legend>
 {{ forms.render(gen_form) }}
