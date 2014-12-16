@@ -38,6 +38,6 @@ iframe{
     top: 20%;
 }
 div#title{
-    align: center;
+    align-self: center;
 }
-}
+
