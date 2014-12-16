@@ -78,7 +78,7 @@ def add_group():
 @app.route("/map")
 def index():
 	gen_form = GenForm()
-	return render_template("index.html",
+	return render_template("mappage.html",
 							gen_form=gen_form)
 
 @app.route("/mapshow", methods=("POST", ))
