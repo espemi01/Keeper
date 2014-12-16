@@ -32,8 +32,7 @@ def new():
 	groups = Group.query.filter(Group.user_id == current_user.id)
 
 	if form.validate():
-		group = Group.query.filter(Group.contact_id == Contact.id)
-		Contact.create(group=group, **form.data)
+		Contact.create(**form.data)
 		flash("Added New Contact")
 		return redirect(url_for("users.index"))
 
