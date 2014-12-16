@@ -4,7 +4,7 @@
 {% block title %}Add a Group{% endblock %}
 {% block content %}
 {{super()}}
-<form action="{{url_for('keeper.view_groups')}}" method="POST">
+<form action="{{url_for('keeper.add_group')}}" method="POST">
 <fieldset>
 <legend>Add A Group</legend>
 {{ forms.render(form) }}
