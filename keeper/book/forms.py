@@ -9,7 +9,7 @@ class GroupForm(Form):
 	name = fields.StringField(validators=[Required()])
 
 class ContactForm(Form):
-	group = QuerySelectField(query_factory=Group.query.all)
+	#group = QuerySelectField(query_factory=Group.query.all)
 
 	name = fields.StringField(validators=[Required()])
 	phone = fields.StringField(validators=[Required()])
