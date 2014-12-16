@@ -8,6 +8,7 @@ from keeper.data import query_to_list
 keeper = Blueprint("keeper", __name__)
 users = Blueprint("users", __name__)
 
+
 @keeper.route("/groups/<name>")
 @login_required
 def view_group(name):
@@ -53,18 +54,12 @@ def add_group():
 @keeper.route("/map", methods=("GET", "POST"))
 @login_required
 def view_map():
-	gen_form = ContactForm()
-	return render_template("maps/mappage.html",
-							gen_form=gen_form)
-
-@keeper.route("/mapshow", methods=("POST", "GET"))
-def get_param():
 	form = ContactForm()
+
 	if form.validate_on_submit():
 		url=makeurl(form)
 		return render_template('maps/googlemaps.html', url=url)
-	return render_template("maps/error.html", form=form)
-
+	return render_template('maps/mappage.html', form=form)
 
 _LINK = Markup('<a href="{url}">{name}</a>')
 
