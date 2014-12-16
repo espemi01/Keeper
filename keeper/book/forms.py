@@ -4,13 +4,12 @@ from wtforms.validators import Required
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 from flask.ext.login import current_user
 from .models import Group, Contact
-from flask import Blueprint
 
 class GroupForm(Form):
 	name = fields.StringField(validators=[Required()])
 
 class ContactForm(Form):
-	# group = QuerySelectField(query_factory=Group.query.filter(g.user_id == user.id))
+	group = QuerySelectField(query_factory=Group.query.all)
 
 	name = fields.StringField(validators=[Required()])
 	phone = fields.StringField(validators=[Required()])

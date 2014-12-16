@@ -5,7 +5,7 @@
 {% block content %}
 {{ super() }}
 
-<form action="{{url_for('keeper.new')}}" method="POST">
+<form action="{{url_for('keeper.new'), g, user}}" method="POST">
 <fieldset>
 <legend>Add A Contact for {{ group.name }}</legend>
 {{ forms.render(form) }}

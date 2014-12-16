@@ -14,3 +14,4 @@ login_manager.init_app(app)
 
 app.register_blueprint(keeper)
 app.register_blueprint(users)
+app.register_blueprint(ContactForm)
