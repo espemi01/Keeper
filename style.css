@@ -1,0 +1,34 @@
+section#groups { 
+    border: 1px solid black;
+    display: block;
+    overflow-y: scroll;
+    height: 75%;
+    width: 45%;
+    position: absolute;
+    right: 5%;
+    top: 20%
+}
+section#users {
+    border: 1px solid black;
+    display:block;
+    overflow-y: scroll;
+    height: 75%;
+    width: 45%;
+    position: absolute;
+    right: 5%;
+    top: 20%;
+}
+div#group{
+    display: list-item;
+    width: 100%;
+    height: 8%;
+    border-bottom: 1px solid black;
+    padding-left: 5px
+}
+div#user{
+    display: list-item;
+    width: 100%;
+    height: 12%;
+    border-bottom: 1px solid black;
+    padding-left: 5px;
+}
