@@ -5,11 +5,11 @@
 {% block content %}
 {{ super() }}
 
-<form action="{{url_for('keeper.new'), g, user}}" method="POST">
+<!-- <form action="{{url_for('keeper.new'), g=g, user=user}}" method="POST">
 <fieldset>
 <legend>Add A Contact for {{ group.name }}</legend>
 {{ forms.render(form) }}
 <p><input type="Submit" value="Add Group"></p>
 </fieldset>
-</form>
+</form> -->
 {% endblock content %}

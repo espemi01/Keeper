@@ -17,7 +17,7 @@ def view_group(id=None):
 
 	query = Contact.query.filter(Contact.group_id == group_id)
 	data = query_to_list(query)
-	return render_template("book/group.html", contacts=data, contact=contact)
+	return render_template("book/view.html", info=data)
 
 @keeper.route("/groups", methods=("GET", "POST"))
 @login_required
@@ -32,8 +32,9 @@ def view_groups(group_id=None):
 @keeper.route("/new", methods=("GET", "POST"))
 @login_required
 def new():
-	g = Group.get_or_404(current_user.id)
+	
 	form = ContactForm()
+
 
 	if form.validate():
 		Contact.create(group=form.group, **form.data)
