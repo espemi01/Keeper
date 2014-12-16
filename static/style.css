@@ -37,3 +37,10 @@ iframe{
     right: 5%;
     top: 20%;
 }
+div#title{
+    width: 20%;
+    position: absolute;
+    left: 40%;
+    
+}
+
