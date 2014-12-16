@@ -77,13 +77,13 @@ def add_group():
 		pass
 	return render_template("book/group.html", group=results, form=form)
 
-@app.route("/map")
+@keeper.route("/map")
 def index():
 	gen_form = GenForm()
 	return render_template("mappage.html",
 							gen_form=gen_form)
 
-@app.route("/mapshow", methods=("POST", ))
+@keeper.route("/mapshow", methods=("POST", ))
 def get_param():
 	form = GenForm()
 	if form.validate_on_submit():
