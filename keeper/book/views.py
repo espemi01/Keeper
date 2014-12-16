@@ -6,6 +6,7 @@ from .models import Group, Contact
 from keeper.data import query_to_list
 
 keeper = Blueprint("keeper", __name__)
+users = Blueprint("users", __name__)
 
 @keeper.route("/groups/<name>")
 @login_required
@@ -21,24 +22,30 @@ def view_group(id=None):
 @keeper.route("/groups", methods=("GET", "POST"))
 @login_required
 def view_groups(group_id=None):
-	group = Group.get_or_404(current_user.id)
-	if not group.user_id == current_user.id:
-		abort(401)
-	query = user.query.filter(user.id == current_user.id)
+	groups = Group.get_or_404(current_user.id)
+	if not groups.user_id == current_user.id:
+		return redirect(url_for("keeper.add_group"))
+	query = Group.query.filter(Group.user_id == current_user.id)
 	data = query_to_list(query)
 	return render_template("book/view.html", info=data)
 
-@keeper.route("/groups/<group>/new", methods=("GET", "POST"))
+@keeper.route("/new", methods=("GET", "POST"))
 @login_required
-def new(group):
-	form = ContactForm(csrf_enabled=False)
+def new():
+	g = Group.get_or_404(current_user.id)
+	form = ContactForm()
 
-	# if form.validate():
-	# 	Contact.create(group=group, **form.data)
-	# 	flash("Added New Contact")
-	# 	return redirect(url_for("user.index"))
+	if form.validate():
+		Contact.create(group=form.group, **form.data)
+		flash("Added New Contact")
+		return redirect(url_for("users.index"))
 
-	# return jsonify(errors=form.errors), 400
+
+
+	query = Contact.query.filter(Contact.group_id == Group.id)
+	flash("There was a problem, Please try again")
+
+	return render_template("book/contact.html", g=group, user=current_user, form=form)
 
 @keeper.route("/add_group", methods=("GET", "POST"))
 @login_required
@@ -48,7 +55,7 @@ def add_group():
 	if form.validate_on_submit():
 		Group.create(owner=current_user, **form.data)
 		flash("Added Group")
-		return redirect(url_for("user.index"))
+		return redirect(url_for("users.index"))
 
 	query = Group.query.filter(Group.user_id == current_user.id)
 	data = query_to_list(query)

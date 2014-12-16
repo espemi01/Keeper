@@ -20,10 +20,6 @@ class CRUDMixin(object):
 	def get_or_404(cls, id):
 		return cls.query.get_or_404(id)
 
-	@classmethod
-	def get_by_name(cls, name):
-		return cls.query.get_or_404(name)
-
 	def update(self, commit=True, **kwargs):
 		for attr, value in kwargs.itteritems():
 			setattr(self, attr, value)
