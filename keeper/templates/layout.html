@@ -2,6 +2,7 @@
 <html>
 <div>
 <head>
+<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 <title>{% block title %}{{ title }}{% endblock %}</title>
 </head>
 <body style="margin-bottom:0px;">
@@ -16,7 +17,7 @@
 </header>
 {% set messages = get_flashed_messages() %}
 {% if messages %}
-<section>
+<section style="top:-20px;position:relative;">
 	{% for message in messages %}
 	<p>{{ message }}</p>
 	{% endfor %}

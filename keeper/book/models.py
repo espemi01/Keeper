@@ -1,4 +1,5 @@
 from keeper.data import CRUDMixin, db
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 class Group(CRUDMixin, db.Model):
 	__tablename__ = 'groups'
@@ -16,7 +17,7 @@ class Group(CRUDMixin, db.Model):
 		return self.name
 
 class Contact(CRUDMixin, db.Model):
-	__tablename__ = 'contact'
+	__tablename__ = 'contacts'
 
 	name = db.Column(db.String)
 	phone = db.Column(db.String)
