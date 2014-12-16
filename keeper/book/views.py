@@ -10,13 +10,9 @@ users = Blueprint("users", __name__)
 
 @keeper.route("/groups/<name>")
 @login_required
-def view_group(id=None):
-	group = Group.get_or_404(group_id)
-	if not group.user_id == current_user.id:
-		abort(401)
-
-	query = Contact.query.filter(Contact.group_id == group_id)
-	data = query_to_list(query)
+def view_group(name):
+	group = Group.query.filter(Group.name == name)
+	data = query_to_list(group)
 	return render_template("book/view.html", info=data)
 
 @keeper.route("/groups", methods=("GET", "POST"))
@@ -36,12 +32,13 @@ def new():
 	groups = Group.query.filter(Group.user_id == current_user.id)
 
 	if form.validate():
-		group = Group.query.filter(Group.id == form.id)
+		group = Group.query.filter(Group.contact_id == Contact.id)
 		Contact.create(group=group, **form.data)
 		flash("Added New Contact")
 		return redirect(url_for("users.index"))
 
-	return render_template("book/contact.html", g=groups, user=current_user, form=form)
+	data = query_to_list(groups)
+	return render_template("book/contact.html", groups=groups, data=data, user=current_user, form=form)
 
 @keeper.route("/add_group", methods=("GET", "POST"))
 @login_required
@@ -72,9 +69,12 @@ def get_param():
 
 _LINK = Markup('<a href="{url}">{name}</a>')
 
-def _make_link(group_id):
+def _group_link(group_id):
 	url = url_for(".add_group", group_id=group_id)
 	return _LINK.format(url=url, name=group_id)
+
+def _con_link(contact_id):
+	url = url_for(".")
 
 def makeurl(form):
 	address = str(request.form['address'])

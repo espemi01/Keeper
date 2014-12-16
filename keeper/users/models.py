@@ -5,7 +5,8 @@ from backports.pbkdf2 import pbkdf2_hmac, compare_digest
 from flask.ext.login import UserMixin
 from sqlalchemy.ext.hybrid import hybrid_property
 
-from keeper.data import CRUDMixin, db
+from keeper.data import CRUDMixin
+from keeper import db
 
 class User(UserMixin, CRUDMixin, db.Model):
 	__tablename__ = 'users'
