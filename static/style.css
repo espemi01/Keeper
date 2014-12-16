@@ -39,5 +39,6 @@ iframe{
 }
 div#title{
     align-self: center;
+    align-items: center;
 }
 
