@@ -72,7 +72,7 @@ def view_map():
 
 @keeper.route("/mapshow", methods=("POST", ))
 def get_param():
-	form = GenForm()
+	form = ContactForm()
 	if form.validate_on_submit():
 		url=makeurl(form)
 		return render_template('googlemaps.html', url=url)
