@@ -1,4 +1,5 @@
 from flask import abort, Blueprint, flash, jsonify, Markup, redirect, render_template, request, url_for
+from flask_bootstrap import Bootstrap
 from flask.ext.login import current_user, login_required
 
 from .forms import GroupForm, ContactForm
