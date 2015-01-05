@@ -17,6 +17,12 @@ class User(UserMixin, CRUDMixin, db.Model):
 	_salt = db.Column(db.String(120))
 	groups = db.relationship('Group', backref='owner', lazy='dynamic')
 
+	def __init__(self, name, email, _password, _salt, groups):
+		self.name = name
+		self.name = email
+		self._password = _password
+		self.groups = groups
+
 	@hybrid_property
 	def password(self):
 		return self._password

@@ -3,16 +3,15 @@
 {% import "helpers/forms.html" as forms %}
 <html>
 <head>
-<link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
 </head>
 <body>
-  {% block title %}Google Maps Application{% endblock %}
+ {% block title %}Google Maps Application{% endblock %}
 {% block content %}
 {{ super() }}
-<form action="{{url_for('get_param')}}" method="POST">
+<form action="{{url_for('view_map')}}" method="POST">
 <fieldset>
 <legend>Make a Map</legend>
-{{ forms.render(gen_form) }}
+{{ forms.render(form) }}
 <p><input type="Submit" value="Press to Generate Map"></p>
 </fieldset>
 </form>
