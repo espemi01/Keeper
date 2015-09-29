@@ -6,7 +6,7 @@ from .forms import GroupForm, ContactForm
 from .models import Group, Contact
 from keeper.data import query_to_list
 
-keeper = Blueprint("keeper", __name__)
+keeper = Blueprint("keeper", __name__)qq
 users = Blueprint("users", __name__)
 
 
